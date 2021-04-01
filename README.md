@@ -1,12 +1,8 @@
-# example title
+# Quick ReadMe
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
 
-example description
-
-example description cont
-
-example description cont
+This program generates a professional readme quickly and easily just be following various steps in the command line! In fact this very readme was generated with this program!
 
 ## Table of Contents
 
@@ -24,42 +20,26 @@ example description cont
 
 ## Installation
 
-example install
-
-example install cont
-
-example install cont
+Just clone this github repo, do npm init, and then npm i, and it should just work right out of the box!
 
 ## Usage
 
-example usage
-
-example usage cont
-
-example usage cont
+Use 'nodex index.js' and you will have a readme done in no time!
 
 ## License
 
-Licensed under the GNU General Public License v3.0, see 'COPYING.txt' for more information
+Licensed under the Unlicense license, see 'Unlicense.txt' for more information
 
 ## Contribution
 
-example contributing
-
-example contributing cont
-
-example contributing cont
+No contributions will be taken at this time.
 
 ## Testing
 
-example tests
-
-example tests cont
-
-example tests cont
+I didn't use any third party tools, but did write a function to fill in test data to ensure that the creation of the readme was working.
 
 ## Questions
 
-[Github Profile](https://github.com/RGBLEDeverything) 
+[Github Profile](https://github.com/BrandonMinard) 
 
-If you have any other questions about this project you can reach me at me@something.net
+If you have any other questions about this project you can reach me at brandon.minard@gmail.com
