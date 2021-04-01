@@ -8,6 +8,20 @@ example description cont
 
 example description cont
 
+## Table of Contents
+
+* [Installation](#installation)
+
+* [Usage](#usage)
+
+* [License](#license)
+
+* [Contribution](#contribution)
+
+* [Testing](#testing)
+
+* [Questions](#questions)
+
 ## Installation
 
 example install
@@ -46,6 +60,6 @@ example tests cont
 
 ## Questions
 
-[Github Profile](https://github.com/BrandonMinard)
+[Github Profile](https://github.com/RGBLEDeverything) 
 
 If you have any other questions about this project you can reach me at me@something.net
