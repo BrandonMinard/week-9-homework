@@ -82,7 +82,29 @@ const makeReadme = () => {
 
     //make toc later
     //ToC
+    massiveTextBlob.push("## Table of Contents\n\n")
 
+    if (readMeObj.install) {
+        massiveTextBlob.push("* [Installation](#installation)\n\n")
+    }
+    if (readMeObj.usage) {
+        massiveTextBlob.push("* [Usage](#usage)\n\n")
+    }
+
+    if (readMeObj.license) {
+        massiveTextBlob.push("* [License](#license)\n\n")
+    }
+    if (readMeObj.contributing) {
+        massiveTextBlob.push("* [Contribution](#contribution)\n\n")
+    }
+
+    if (readMeObj.tests) {
+        massiveTextBlob.push("* [Testing](#testing)\n\n")
+    }
+
+    if (readMeObj.email || readMeObj.github) {
+        massiveTextBlob.push("* [Questions](#questions)\n\n")
+    }
     //installation
 
     if (readMeObj.install) {
