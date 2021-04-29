@@ -219,9 +219,6 @@ const promptssss = [
     { prompt: "Please describe how you tested your project", writeTo: "testing", type: "array" },
     { prompt: "Please input your github username", writeTo: "github", type: "array" },
     { prompt: "Please input your email", writeTo: "email", type: "array" }
-
-
-
 ]
 let indexer = 0
 recursiveInqExp(promptssss[indexer])
