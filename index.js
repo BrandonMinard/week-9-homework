@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+//setting up variables
 const writingObj = {}
 const promptssss = [
     { prompt: "What's the name of your project?", writeTo: "title", type: "string" },
@@ -14,6 +15,7 @@ const promptssss = [
 ]
 let indexer = 0
 
+//all my testing data.
 const setExampleData = () => {
     writingObj.title = "example title";
     writingObj.description = ["example description", "example description cont", "example description cont"];
@@ -28,17 +30,22 @@ const setExampleData = () => {
     console.log(writingObj)
 }
 
+//The intro console log
 console.log("Welcome to QuickReadme,\n please follow along and answer questions appropriately to automatically generate a professional readme!\n", "If you'd like to insert a linebreak, input '-n'", "If you'd like to skip the current piece of input, just don't enter anything and hit ENTER")
 
+//the full readme creation function, it's bloated.
 const makeReadme = () => {
+    //rewriting the data I'm capturing to conform to my old makereadme stuff.
     for (const key in writingObj) {
         if (Object.hasOwnProperty.call(writingObj, key)) {
+            //getting stuff out of the big written object.
             const element = writingObj[key];
-            const thingIs = key;
             const eleType = element[0]
             let eleContents = element[1]
+            //Make sure it's actually got data
             if (eleContents.length === 0) {
                 writingObj[key] = []
+                //do stuff if it's type is array, to split on '-n'.
             } else if (eleType === "array") {
                 let newContents = [];
                 let arr = eleContents.split("-n");
@@ -49,16 +56,18 @@ const makeReadme = () => {
                     }
                 }
                 writingObj[key] = newContents
-
+                //rewriting for dumb reasons, it's passed in as an array of type and contents, so rewriting it to just contents is far easier.
             } else if (!(key === "license" || key === "badge")) {
                 writingObj[key] = eleContents
             }
-
         }
     }
 
+    //where we put stuff.
     let massiveTextBlob = []
 
+
+    //writing title long as it's present.
     if (writingObj.title.length > 0) {
         massiveTextBlob.push("# " + writingObj.title + "\n\n")
     }
@@ -74,7 +83,7 @@ const makeReadme = () => {
         }
     }
 
-    //ToC
+    //makes the table of contents, the table only lists things that have data.
     massiveTextBlob.push("## Table of Contents\n\n")
 
     if (writingObj.install.length > 0) {
@@ -100,9 +109,11 @@ const makeReadme = () => {
         massiveTextBlob.push("* [Questions](#questions)\n\n")
     }
 
+    //adding actual content sections
     massiveTextBlob = addSection("Installation", writingObj.install, massiveTextBlob)
     massiveTextBlob = addSection("Usage", writingObj.usage, massiveTextBlob)
 
+    //license is special, it always has data.
     if (writingObj.license) {
         massiveTextBlob.push("## License\n\n")
         massiveTextBlob.push(writingObj.license + "\n\n")
@@ -111,6 +122,7 @@ const makeReadme = () => {
     massiveTextBlob = addSection("Contribution", writingObj.contributing, massiveTextBlob)
     massiveTextBlob = addSection("Testing", writingObj.testing, massiveTextBlob)
 
+    //Questions is also special, as it keys off of two pieces of data.
     if (writingObj.email.length > 0 || writingObj.github.length > 0) {
         massiveTextBlob.push("## Questions\n\n")
         if (writingObj.github) {
@@ -121,7 +133,8 @@ const makeReadme = () => {
         }
     }
 
-    fs.writeFile("genreadMe.txt", massiveTextBlob.join(""), function (err, data) {
+    //write to file on harddisk.
+    fs.writeFile("GENREADME.txt", massiveTextBlob.join(""), function (err, data) {
         if (err) {
             return console.log(err);
         }
@@ -129,6 +142,7 @@ const makeReadme = () => {
     });
 }
 
+//Just the add content section function.
 function addSection(name, contents, massiveTextBlob) {
     if (contents.length > 0) {
         massiveTextBlob.push(`## ${name}\n\n`)
@@ -142,7 +156,7 @@ function addSection(name, contents, massiveTextBlob) {
     return massiveTextBlob
 }
 
-
+//mostly unneeded remnant from early version.
 function promptObj(message1) {
     return {
         type: 'input',
@@ -151,10 +165,15 @@ function promptObj(message1) {
     }
 }
 
+//the beginning of our recurion
+//Recursion is mandatory to make Inquirer play nice.
 recursiveInqExp(promptssss[indexer])
 
+
 function recursiveInqExp(objyThing) {
+    //iterate our counter
     indexer++;
+    //get data from inquirer
     if (!(objyThing.prompt === "license")) {
         inquirer.prompt(promptObj(objyThing.prompt)
         ).then((answers) => {
@@ -162,6 +181,7 @@ function recursiveInqExp(objyThing) {
             writingObj[objyThing.writeTo] = [objyThing.type, answers.name];
         }).finally(() => {
             if (indexer >= promptssss.length) {
+                //ending clause
                 makeReadme()
                 console.log("Thank you, please see this directory for your generated README, it will be called GENREADME.txt. Please copy it to your project's directory and rename the file 'README.MD'.")
                 return;
@@ -169,6 +189,7 @@ function recursiveInqExp(objyThing) {
                 recursiveInqExp(promptssss[indexer])
             }
         });
+        //same as above but for the license stuff.
     } else {
         inquirer.prompt([
             {
